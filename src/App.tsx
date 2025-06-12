@@ -17,6 +17,11 @@ import RatioCalculator from './pages/calculators/RatioCalculator';
 import AverageCalculator from './pages/calculators/AverageCalculator';
 import RandomNumberGenerator from './pages/calculators/RandomNumberGenerator';
 import AreaCalculator from './pages/calculators/AreaCalculator';
+import VolumeCalculator from './pages/calculators/VolumeCalculator';
+import PerimeterCalculator from './pages/calculators/PerimeterCalculator';
+import QuadraticFormulaCalculator from './pages/calculators/QuadraticFormulaCalculator';
+import StatisticsCalculator from './pages/calculators/StatisticsCalculator';
+import PrimeNumberCalculator from './pages/calculators/PrimeNumberCalculator';
 
 function App() {
   return (
@@ -40,6 +45,11 @@ function App() {
             <Route path="/average-calculator" element={<AverageCalculator />} />
             <Route path="/random-number-generator" element={<RandomNumberGenerator />} />
             <Route path="/area-calculator" element={<AreaCalculator />} />
+            <Route path="/volume-calculator" element={<VolumeCalculator />} />
+            <Route path="/perimeter-calculator" element={<PerimeterCalculator />} />
+            <Route path="/quadratic-formula" element={<QuadraticFormulaCalculator />} />
+            <Route path="/statistics-calculator" element={<StatisticsCalculator />} />
+            <Route path="/prime-number-calculator" element={<PrimeNumberCalculator />} />
           </Routes>
         </main>
         <Footer />
