@@ -10,14 +10,14 @@ const Footer: React.FC = () => {
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
               <Calculator className="w-6 h-6 text-blue-400" />
-              <span className="text-xl font-bold">Calculator.net</span>
+              <span className="text-xl font-bold">TheCalcUniverse</span>
             </div>
             <p className="text-gray-300 mb-4 leading-relaxed">
               Your comprehensive source for free online calculators. From basic math to complex financial calculations, 
               we provide accurate and easy-to-use tools for all your calculation needs.
             </p>
             <p className="text-gray-400 text-sm">
-              © 2024 Calculator.net. All rights reserved.
+              © 2024 TheCalcUniverse.com. All rights reserved.
             </p>
           </div>
 
@@ -35,11 +35,11 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Categories</h3>
             <ul className="space-y-2">
-              <li><Link to="/" className="text-gray-300 hover:text-blue-400 transition-colors">Math Calculators</Link></li>
-              <li><Link to="/" className="text-gray-300 hover:text-blue-400 transition-colors">Finance Calculators</Link></li>
-              <li><Link to="/" className="text-gray-300 hover:text-blue-400 transition-colors">Health Calculators</Link></li>
-              <li><Link to="/" className="text-gray-300 hover:text-blue-400 transition-colors">Conversion Tools</Link></li>
-              <li><Link to="/" className="text-gray-300 hover:text-blue-400 transition-colors">Date Calculators</Link></li>
+              <li><Link to="/math-calculators" className="text-gray-300 hover:text-blue-400 transition-colors">Math Calculators</Link></li>
+              <li><Link to="/financial" className="text-gray-300 hover:text-blue-400 transition-colors">Finance Calculators</Link></li>
+              <li><Link to="/health-fitness" className="text-gray-300 hover:text-blue-400 transition-colors">Health Calculators</Link></li>
+              <li><Link to="/conversion-tools" className="text-gray-300 hover:text-blue-400 transition-colors">Conversion Tools</Link></li>
+              <li><Link to="/date-time" className="text-gray-300 hover:text-blue-400 transition-colors">Date Calculators</Link></li>
             </ul>
           </div>
         </div>

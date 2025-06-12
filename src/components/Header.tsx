@@ -222,7 +222,7 @@ const Header: React.FC = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 transition-colors">
             <Calculator className="w-8 h-8" />
-            <span className="text-xl font-bold">Calculator.net</span>
+            <span className="text-xl font-bold">TheCalcUniverse</span>
           </Link>
 
           {/* Desktop Search */}
