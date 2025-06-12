@@ -32,6 +32,11 @@ import GCDCalculator from './pages/calculators/GCDCalculator';
 import LCMCalculator from './pages/calculators/LCMCalculator';
 import FibonacciCalculator from './pages/calculators/FibonacciCalculator';
 import ScientificNotationCalculator from './pages/calculators/ScientificNotationCalculator';
+import ProportionCalculator from './pages/calculators/ProportionCalculator';
+import RoundingCalculator from './pages/calculators/RoundingCalculator';
+import BigNumberCalculator from './pages/calculators/BigNumberCalculator';
+import CommonDenominatorCalculator from './pages/calculators/CommonDenominatorCalculator';
+import LongDivisionCalculator from './pages/calculators/LongDivisionCalculator';
 
 function App() {
   return (
@@ -70,6 +75,11 @@ function App() {
             <Route path="/lcm-calculator" element={<LCMCalculator />} />
             <Route path="/fibonacci-calculator" element={<FibonacciCalculator />} />
             <Route path="/scientific-notation-calculator" element={<ScientificNotationCalculator />} />
+            <Route path="/proportion-calculator" element={<ProportionCalculator />} />
+            <Route path="/rounding-calculator" element={<RoundingCalculator />} />
+            <Route path="/big-number-calculator" element={<BigNumberCalculator />} />
+            <Route path="/common-denominator-calculator" element={<CommonDenominatorCalculator />} />
+            <Route path="/long-division-calculator" element={<LongDivisionCalculator />} />
           </Routes>
         </main>
         <Footer />
