@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import PageLayout from './components/PageLayout';
 import Home from './pages/Home';
 import MathCalculators from './pages/MathCalculators';
 import BasicCalculator from './pages/calculators/BasicCalculator';
@@ -44,188 +43,45 @@ function App() {
     <Router>
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
         <Header />
-        <Routes>
-          {/* Home page without sidebar */}
-          <Route path="/" element={
-            <PageLayout showSidebar={false}>
-              <Home />
-            </PageLayout>
-          } />
-          
-          {/* Math Calculators page without sidebar (has its own layout) */}
-          <Route path="/math-calculators" element={
-            <PageLayout showSidebar={false}>
-              <MathCalculators />
-            </PageLayout>
-          } />
-          
-          {/* All calculator pages with sidebar */}
-          <Route path="/basic-calculator" element={
-            <PageLayout>
-              <BasicCalculator />
-            </PageLayout>
-          } />
-          <Route path="/scientific-calculator" element={
-            <PageLayout>
-              <ScientificCalculator />
-            </PageLayout>
-          } />
-          <Route path="/bmi-calculator" element={
-            <PageLayout>
-              <BMICalculator />
-            </PageLayout>
-          } />
-          <Route path="/mortgage-calculator" element={
-            <PageLayout>
-              <MortgageCalculator />
-            </PageLayout>
-          } />
-          <Route path="/unit-converter" element={
-            <PageLayout>
-              <UnitConverter />
-            </PageLayout>
-          } />
-          <Route path="/date-calculator" element={
-            <PageLayout>
-              <DateCalculator />
-            </PageLayout>
-          } />
-          <Route path="/grade-calculator" element={
-            <PageLayout>
-              <GradeCalculator />
-            </PageLayout>
-          } />
-          <Route path="/percentage-calculator" element={
-            <PageLayout>
-              <PercentageCalculator />
-            </PageLayout>
-          } />
-          <Route path="/fraction-calculator" element={
-            <PageLayout>
-              <FractionCalculator />
-            </PageLayout>
-          } />
-          <Route path="/ratio-calculator" element={
-            <PageLayout>
-              <RatioCalculator />
-            </PageLayout>
-          } />
-          <Route path="/average-calculator" element={
-            <PageLayout>
-              <AverageCalculator />
-            </PageLayout>
-          } />
-          <Route path="/random-number-generator" element={
-            <PageLayout>
-              <RandomNumberGenerator />
-            </PageLayout>
-          } />
-          <Route path="/area-calculator" element={
-            <PageLayout>
-              <AreaCalculator />
-            </PageLayout>
-          } />
-          <Route path="/volume-calculator" element={
-            <PageLayout>
-              <VolumeCalculator />
-            </PageLayout>
-          } />
-          <Route path="/perimeter-calculator" element={
-            <PageLayout>
-              <PerimeterCalculator />
-            </PageLayout>
-          } />
-          <Route path="/quadratic-formula" element={
-            <PageLayout>
-              <QuadraticFormulaCalculator />
-            </PageLayout>
-          } />
-          <Route path="/statistics-calculator" element={
-            <PageLayout>
-              <StatisticsCalculator />
-            </PageLayout>
-          } />
-          <Route path="/prime-number-calculator" element={
-            <PageLayout>
-              <PrimeNumberCalculator />
-            </PageLayout>
-          } />
-          <Route path="/triangle-calculator" element={
-            <PageLayout>
-              <TriangleCalculator />
-            </PageLayout>
-          } />
-          <Route path="/matrix-calculator" element={
-            <PageLayout>
-              <MatrixCalculator />
-            </PageLayout>
-          } />
-          <Route path="/logarithm-calculator" element={
-            <PageLayout>
-              <LogarithmCalculator />
-            </PageLayout>
-          } />
-          <Route path="/root-calculator" element={
-            <PageLayout>
-              <RootCalculator />
-            </PageLayout>
-          } />
-          <Route path="/binary-calculator" element={
-            <PageLayout>
-              <BinaryCalculator />
-            </PageLayout>
-          } />
-          <Route path="/factorial-calculator" element={
-            <PageLayout>
-              <FactorialCalculator />
-            </PageLayout>
-          } />
-          <Route path="/gcd-calculator" element={
-            <PageLayout>
-              <GCDCalculator />
-            </PageLayout>
-          } />
-          <Route path="/lcm-calculator" element={
-            <PageLayout>
-              <LCMCalculator />
-            </PageLayout>
-          } />
-          <Route path="/fibonacci-calculator" element={
-            <PageLayout>
-              <FibonacciCalculator />
-            </PageLayout>
-          } />
-          <Route path="/scientific-notation-calculator" element={
-            <PageLayout>
-              <ScientificNotationCalculator />
-            </PageLayout>
-          } />
-          <Route path="/proportion-calculator" element={
-            <PageLayout>
-              <ProportionCalculator />
-            </PageLayout>
-          } />
-          <Route path="/rounding-calculator" element={
-            <PageLayout>
-              <RoundingCalculator />
-            </PageLayout>
-          } />
-          <Route path="/big-number-calculator" element={
-            <PageLayout>
-              <BigNumberCalculator />
-            </PageLayout>
-          } />
-          <Route path="/common-denominator-calculator" element={
-            <PageLayout>
-              <CommonDenominatorCalculator />
-            </PageLayout>
-          } />
-          <Route path="/long-division-calculator" element={
-            <PageLayout>
-              <LongDivisionCalculator />
-            </PageLayout>
-          } />
-        </Routes>
+        <main className="container mx-auto px-4 py-8">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/math-calculators" element={<MathCalculators />} />
+            <Route path="/basic-calculator" element={<BasicCalculator />} />
+            <Route path="/scientific-calculator" element={<ScientificCalculator />} />
+            <Route path="/bmi-calculator" element={<BMICalculator />} />
+            <Route path="/mortgage-calculator" element={<MortgageCalculator />} />
+            <Route path="/unit-converter" element={<UnitConverter />} />
+            <Route path="/date-calculator" element={<DateCalculator />} />
+            <Route path="/grade-calculator" element={<GradeCalculator />} />
+            <Route path="/percentage-calculator" element={<PercentageCalculator />} />
+            <Route path="/fraction-calculator" element={<FractionCalculator />} />
+            <Route path="/ratio-calculator" element={<RatioCalculator />} />
+            <Route path="/average-calculator" element={<AverageCalculator />} />
+            <Route path="/random-number-generator" element={<RandomNumberGenerator />} />
+            <Route path="/area-calculator" element={<AreaCalculator />} />
+            <Route path="/volume-calculator" element={<VolumeCalculator />} />
+            <Route path="/perimeter-calculator" element={<PerimeterCalculator />} />
+            <Route path="/quadratic-formula" element={<QuadraticFormulaCalculator />} />
+            <Route path="/statistics-calculator" element={<StatisticsCalculator />} />
+            <Route path="/prime-number-calculator" element={<PrimeNumberCalculator />} />
+            <Route path="/triangle-calculator" element={<TriangleCalculator />} />
+            <Route path="/matrix-calculator" element={<MatrixCalculator />} />
+            <Route path="/logarithm-calculator" element={<LogarithmCalculator />} />
+            <Route path="/root-calculator" element={<RootCalculator />} />
+            <Route path="/binary-calculator" element={<BinaryCalculator />} />
+            <Route path="/factorial-calculator" element={<FactorialCalculator />} />
+            <Route path="/gcd-calculator" element={<GCDCalculator />} />
+            <Route path="/lcm-calculator" element={<LCMCalculator />} />
+            <Route path="/fibonacci-calculator" element={<FibonacciCalculator />} />
+            <Route path="/scientific-notation-calculator" element={<ScientificNotationCalculator />} />
+            <Route path="/proportion-calculator" element={<ProportionCalculator />} />
+            <Route path="/rounding-calculator" element={<RoundingCalculator />} />
+            <Route path="/big-number-calculator" element={<BigNumberCalculator />} />
+            <Route path="/common-denominator-calculator" element={<CommonDenominatorCalculator />} />
+            <Route path="/long-division-calculator" element={<LongDivisionCalculator />} />
+          </Routes>
+        </main>
         <Footer />
       </div>
     </Router>
