@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Home, ChevronRight, Calculator, TrendingUp, BarChart3, PieChart, Activity, Zap, Target, Percent, Square, Triangle, Circle, Ruler, Sigma, FunctionSquare as Function, Hash, Infinity } from 'lucide-react';
+import { Home, ChevronRight, Calculator, TrendingUp, BarChart3, PieChart, Activity, Zap, Target, Percent, Square, Triangle, Circle, Ruler, Sigma, FunctionSquare as Function, Hash, Infinity, Binary, Shuffle, AlertCircle, Clock, RotateCcw, Divide, HexagonIcon as Hex, SquareRoot, TrendingDown, Database, Compass } from 'lucide-react';
 
 const MathCalculators: React.FC = () => {
   const calculatorCategories = [
@@ -15,6 +15,11 @@ const MathCalculators: React.FC = () => {
         { name: 'Percentage Calculator', path: '/percentage-calculator', description: 'Calculate percentages and percentage change' },
         { name: 'Ratio Calculator', path: '/ratio-calculator', description: 'Calculate and simplify ratios' },
         { name: 'Proportion Calculator', path: '/proportion-calculator', description: 'Solve proportions and cross multiplication' },
+        { name: 'Average Calculator', path: '/average-calculator', description: 'Calculate mean, median, mode averages' },
+        { name: 'Rounding Calculator', path: '/rounding-calculator', description: 'Round numbers to specified decimal places' },
+        { name: 'Big Number Calculator', path: '/big-number-calculator', description: 'Calculate with very large numbers' },
+        { name: 'Common Denominator Calculator', path: '/common-denominator-calculator', description: 'Find common denominators for fractions' },
+        { name: 'Long Division Calculator', path: '/long-division-calculator', description: 'Perform long division with steps' },
       ]
     },
     {
@@ -24,10 +29,14 @@ const MathCalculators: React.FC = () => {
       calculators: [
         { name: 'Equation Solver', path: '/equation-solver', description: 'Solve linear and quadratic equations' },
         { name: 'System of Equations', path: '/system-equations', description: 'Solve systems of linear equations' },
-        { name: 'Quadratic Formula', path: '/quadratic-formula', description: 'Find roots using quadratic formula' },
+        { name: 'Quadratic Formula Calculator', path: '/quadratic-formula', description: 'Find roots using quadratic formula' },
         { name: 'Factoring Calculator', path: '/factoring-calculator', description: 'Factor polynomials and expressions' },
         { name: 'Polynomial Calculator', path: '/polynomial-calculator', description: 'Add, subtract, multiply polynomials' },
         { name: 'Logarithm Calculator', path: '/logarithm-calculator', description: 'Calculate natural and common logarithms' },
+        { name: 'Log Calculator', path: '/log-calculator', description: 'Calculate logarithms with any base' },
+        { name: 'Exponent Calculator', path: '/exponent-calculator', description: 'Calculate powers and exponents' },
+        { name: 'Root Calculator', path: '/root-calculator', description: 'Calculate square roots, cube roots, nth roots' },
+        { name: 'Slope Calculator', path: '/slope-calculator', description: 'Calculate slope between two points' },
       ]
     },
     {
@@ -38,9 +47,12 @@ const MathCalculators: React.FC = () => {
         { name: 'Area Calculator', path: '/area-calculator', description: 'Calculate area of various shapes' },
         { name: 'Perimeter Calculator', path: '/perimeter-calculator', description: 'Calculate perimeter of shapes' },
         { name: 'Volume Calculator', path: '/volume-calculator', description: 'Calculate volume of 3D shapes' },
+        { name: 'Surface Area Calculator', path: '/surface-area-calculator', description: 'Calculate surface area of 3D shapes' },
         { name: 'Triangle Calculator', path: '/triangle-calculator', description: 'Calculate triangle properties' },
+        { name: 'Right Triangle Calculator', path: '/right-triangle-calculator', description: 'Solve right triangle problems' },
         { name: 'Circle Calculator', path: '/circle-calculator', description: 'Calculate circle area, circumference' },
-        { name: 'Pythagorean Theorem', path: '/pythagorean-theorem', description: 'Calculate triangle sides using Pythagorean theorem' },
+        { name: 'Pythagorean Theorem Calculator', path: '/pythagorean-theorem', description: 'Calculate triangle sides using Pythagorean theorem' },
+        { name: 'Distance Calculator', path: '/distance-calculator', description: 'Calculate distance between two points' },
       ]
     },
     {
@@ -49,7 +61,6 @@ const MathCalculators: React.FC = () => {
       color: 'from-red-500 to-red-600',
       calculators: [
         { name: 'Trigonometry Calculator', path: '/trigonometry-calculator', description: 'Calculate sin, cos, tan functions' },
-        { name: 'Right Triangle Calculator', path: '/right-triangle-calculator', description: 'Solve right triangle problems' },
         { name: 'Law of Sines', path: '/law-of-sines', description: 'Solve triangles using law of sines' },
         { name: 'Law of Cosines', path: '/law-of-cosines', description: 'Solve triangles using law of cosines' },
         { name: 'Unit Circle Calculator', path: '/unit-circle-calculator', description: 'Find coordinates on unit circle' },
@@ -62,11 +73,17 @@ const MathCalculators: React.FC = () => {
       color: 'from-orange-500 to-orange-600',
       calculators: [
         { name: 'Statistics Calculator', path: '/statistics-calculator', description: 'Mean, median, mode, standard deviation' },
+        { name: 'Mean, Median, Mode, Range Calculator', path: '/mean-median-mode-calculator', description: 'Calculate central tendency measures' },
+        { name: 'Standard Deviation Calculator', path: '/standard-deviation', description: 'Calculate population and sample standard deviation' },
         { name: 'Probability Calculator', path: '/probability-calculator', description: 'Calculate probability and combinations' },
         { name: 'Combination Calculator', path: '/combination-calculator', description: 'Calculate combinations and permutations' },
-        { name: 'Standard Deviation', path: '/standard-deviation', description: 'Calculate population and sample standard deviation' },
-        { name: 'Z-Score Calculator', path: '/z-score-calculator', description: 'Calculate z-scores and probabilities' },
+        { name: 'Permutation and Combination Calculator', path: '/permutation-combination-calculator', description: 'Calculate permutations and combinations' },
+        { name: 'Z-score Calculator', path: '/z-score-calculator', description: 'Calculate z-scores and probabilities' },
         { name: 'Correlation Calculator', path: '/correlation-calculator', description: 'Calculate correlation coefficient' },
+        { name: 'Sample Size Calculator', path: '/sample-size-calculator', description: 'Calculate required sample size' },
+        { name: 'Confidence Interval Calculator', path: '/confidence-interval-calculator', description: 'Calculate confidence intervals' },
+        { name: 'P-value Calculator', path: '/p-value-calculator', description: 'Calculate statistical p-values' },
+        { name: 'Percent Error Calculator', path: '/percent-error-calculator', description: 'Calculate percentage error in measurements' },
       ]
     },
     {
@@ -75,11 +92,25 @@ const MathCalculators: React.FC = () => {
       color: 'from-indigo-500 to-indigo-600',
       calculators: [
         { name: 'Prime Number Calculator', path: '/prime-number-calculator', description: 'Check if number is prime, find primes' },
-        { name: 'GCD Calculator', path: '/gcd-calculator', description: 'Greatest common divisor calculator' },
-        { name: 'LCM Calculator', path: '/lcm-calculator', description: 'Least common multiple calculator' },
+        { name: 'Prime Factorization Calculator', path: '/prime-factorization-calculator', description: 'Find prime factors of numbers' },
+        { name: 'Factor Calculator', path: '/factor-calculator', description: 'Find all factors of a number' },
+        { name: 'Greatest Common Factor Calculator', path: '/gcd-calculator', description: 'Greatest common divisor calculator' },
+        { name: 'Least Common Multiple Calculator', path: '/lcm-calculator', description: 'Least common multiple calculator' },
         { name: 'Factorial Calculator', path: '/factorial-calculator', description: 'Calculate factorial of numbers' },
         { name: 'Fibonacci Calculator', path: '/fibonacci-calculator', description: 'Generate Fibonacci sequence' },
+        { name: 'Number Sequence Calculator', path: '/number-sequence-calculator', description: 'Find patterns in number sequences' },
+        { name: 'Random Number Generator', path: '/random-number-generator', description: 'Generate random numbers' },
+      ]
+    },
+    {
+      title: 'Number Systems',
+      icon: Binary,
+      color: 'from-cyan-500 to-cyan-600',
+      calculators: [
         { name: 'Number Base Converter', path: '/number-base-converter', description: 'Convert between number bases' },
+        { name: 'Binary Calculator', path: '/binary-calculator', description: 'Perform calculations in binary' },
+        { name: 'Hex Calculator', path: '/hex-calculator', description: 'Perform calculations in hexadecimal' },
+        { name: 'Scientific Notation Calculator', path: '/scientific-notation-calculator', description: 'Convert to and from scientific notation' },
       ]
     },
     {
@@ -92,7 +123,6 @@ const MathCalculators: React.FC = () => {
         { name: 'Limit Calculator', path: '/limit-calculator', description: 'Calculate limits of functions' },
         { name: 'Series Calculator', path: '/series-calculator', description: 'Calculate infinite series and sequences' },
         { name: 'Taylor Series', path: '/taylor-series', description: 'Generate Taylor series expansions' },
-        { name: 'Slope Calculator', path: '/slope-calculator', description: 'Calculate slope between two points' },
       ]
     },
     {
@@ -107,6 +137,14 @@ const MathCalculators: React.FC = () => {
         { name: 'Cross Product', path: '/cross-product', description: 'Calculate vector cross product' },
         { name: 'Dot Product', path: '/dot-product', description: 'Calculate vector dot product' },
       ]
+    },
+    {
+      title: 'Specialized',
+      icon: Clock,
+      color: 'from-amber-500 to-amber-600',
+      calculators: [
+        { name: 'Half-Life Calculator', path: '/half-life-calculator', description: 'Calculate radioactive decay and half-life' },
+      ]
     }
   ];
 
@@ -114,9 +152,15 @@ const MathCalculators: React.FC = () => {
     { name: 'Basic Calculator', path: '/basic-calculator', icon: Calculator, description: 'Simple arithmetic operations' },
     { name: 'Scientific Calculator', path: '/scientific-calculator', icon: Zap, description: 'Advanced mathematical functions' },
     { name: 'Percentage Calculator', path: '/percentage-calculator', icon: Percent, description: 'Calculate percentages' },
+    { name: 'Fraction Calculator', path: '/fraction-calculator', icon: Divide, description: 'Fraction operations' },
     { name: 'Area Calculator', path: '/area-calculator', icon: Square, description: 'Calculate area of shapes' },
     { name: 'Statistics Calculator', path: '/statistics-calculator', icon: BarChart3, description: 'Statistical calculations' },
-    { name: 'Equation Solver', path: '/equation-solver', icon: Function, description: 'Solve mathematical equations' },
+    { name: 'Quadratic Formula Calculator', path: '/quadratic-formula', icon: Function, description: 'Solve quadratic equations' },
+    { name: 'Triangle Calculator', path: '/triangle-calculator', icon: Triangle, description: 'Triangle calculations' },
+    { name: 'Random Number Generator', path: '/random-number-generator', icon: Shuffle, description: 'Generate random numbers' },
+    { name: 'Prime Number Calculator', path: '/prime-number-calculator', icon: Hash, description: 'Check prime numbers' },
+    { name: 'Binary Calculator', path: '/binary-calculator', icon: Binary, description: 'Binary arithmetic' },
+    { name: 'Matrix Calculator', path: '/matrix-calculator', icon: Square, description: 'Matrix operations' },
   ];
 
   return (
@@ -142,7 +186,7 @@ const MathCalculators: React.FC = () => {
           </h1>
         </div>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          Comprehensive collection of mathematical calculators for students, teachers, and professionals. 
+          Comprehensive collection of over 80 mathematical calculators for students, teachers, and professionals. 
           From basic arithmetic to advanced calculus, find the right tool for your mathematical needs.
         </p>
       </div>
@@ -150,7 +194,7 @@ const MathCalculators: React.FC = () => {
       {/* Popular Calculators */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">Most Popular Math Calculators</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {popularCalculators.map((calc, index) => (
             <Link
               key={index}
@@ -178,7 +222,7 @@ const MathCalculators: React.FC = () => {
       {/* Calculator Categories */}
       <section className="mb-16">
         <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-          Math Calculator Categories
+          Complete Math Calculator Collection
         </h2>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -255,7 +299,7 @@ const MathCalculators: React.FC = () => {
               <Sigma className="w-8 h-8 text-white" />
             </div>
             <h3 className="text-lg font-semibold mb-2">Comprehensive</h3>
-            <p className="text-blue-100 text-sm">Complete mathematical toolkit</p>
+            <p className="text-blue-100 text-sm">80+ mathematical tools</p>
           </div>
         </div>
       </section>
