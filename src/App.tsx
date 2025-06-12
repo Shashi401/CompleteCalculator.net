@@ -22,6 +22,11 @@ import PerimeterCalculator from './pages/calculators/PerimeterCalculator';
 import QuadraticFormulaCalculator from './pages/calculators/QuadraticFormulaCalculator';
 import StatisticsCalculator from './pages/calculators/StatisticsCalculator';
 import PrimeNumberCalculator from './pages/calculators/PrimeNumberCalculator';
+import TriangleCalculator from './pages/calculators/TriangleCalculator';
+import MatrixCalculator from './pages/calculators/MatrixCalculator';
+import LogarithmCalculator from './pages/calculators/LogarithmCalculator';
+import RootCalculator from './pages/calculators/RootCalculator';
+import BinaryCalculator from './pages/calculators/BinaryCalculator';
 
 function App() {
   return (
@@ -50,6 +55,11 @@ function App() {
             <Route path="/quadratic-formula" element={<QuadraticFormulaCalculator />} />
             <Route path="/statistics-calculator" element={<StatisticsCalculator />} />
             <Route path="/prime-number-calculator" element={<PrimeNumberCalculator />} />
+            <Route path="/triangle-calculator" element={<TriangleCalculator />} />
+            <Route path="/matrix-calculator" element={<MatrixCalculator />} />
+            <Route path="/logarithm-calculator" element={<LogarithmCalculator />} />
+            <Route path="/root-calculator" element={<RootCalculator />} />
+            <Route path="/binary-calculator" element={<BinaryCalculator />} />
           </Routes>
         </main>
         <Footer />
