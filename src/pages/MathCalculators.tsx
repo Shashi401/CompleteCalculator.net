@@ -1,25 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  Home, 
-  ChevronRight, 
-  Calculator, 
-  TrendingUp,
-  BarChart3,
-  PieChart,
-  Activity,
-  Zap,
-  Target,
-  Percent,
-  Square,
-  Triangle,
-  Circle,
-  Ruler,
-  Sigma,
-  Function,
-  Hash,
-  Infinity
-} from 'lucide-react';
+import { Home, ChevronRight, Calculator, TrendingUp, BarChart3, PieChart, Activity, Zap, Target, Percent, Square, Triangle, Circle, Ruler, Sigma, FunctionSquare as Function, Hash, Infinity } from 'lucide-react';
 
 const MathCalculators: React.FC = () => {
   const calculatorCategories = [
