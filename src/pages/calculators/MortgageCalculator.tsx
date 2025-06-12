@@ -11,6 +11,228 @@ interface PaymentBreakdown {
   totalInterest: number;
 }
 
+// Utility functions moved outside component
+const formatCurrency = (amount: number) => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(amount);
+};
+
+const formatCurrencyDetailed = (amount: number) => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(amount);
+};
+
+// Chart components moved outside main component
+const PieChartComponent: React.FC<{ data: { label: string; value: number; color: string }[] }> = ({ data }) => {
+  if (!data || !Array.isArray(data)) {
+    return null;
+  }
+  
+  const total = data.reduce((sum, item) => sum + item.value, 0);
+  let cumulativePercentage = 0;
+
+  return (
+    <div className="relative w-48 h-48 mx-auto">
+      <svg viewBox="0 0 100 100" className="w-full h-full transform -rotate-90">
+        {data.map((item, index) => {
+          const percentage = (item.value / total) * 100;
+          const strokeDasharray = `${percentage} ${100 - percentage}`;
+          const strokeDashoffset = -cumulativePercentage;
+          cumulativePercentage += percentage;
+
+          return (
+            <circle
+              key={index}
+              cx="50"
+              cy="50"
+              r="15.915"
+              fill="transparent"
+              stroke={item.color}
+              strokeWidth="31.83"
+              strokeDasharray={strokeDasharray}
+              strokeDashoffset={strokeDashoffset}
+              className="transition-all duration-300"
+            />
+          );
+        })}
+      </svg>
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-lg font-bold text-gray-900">{formatCurrency(total)}</div>
+          <div className="text-xs text-gray-600">Total</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const AmortizationChart: React.FC<{ amortizationSchedule: PaymentBreakdown[] }> = ({ amortizationSchedule }) => {
+  if (!amortizationSchedule.length) return null;
+
+  const years = Math.ceil(amortizationSchedule.length / 12);
+  const yearlyData = [];
+
+  for (let year = 1; year <= years; year++) {
+    const startMonth = (year - 1) * 12;
+    const endMonth = Math.min(year * 12, amortizationSchedule.length);
+    const yearPayments = amortizationSchedule.slice(startMonth, endMonth);
+    
+    const totalPrincipal = yearPayments.reduce((sum, payment) => sum + payment.principal, 0);
+    const totalInterest = yearPayments.reduce((sum, payment) => sum + payment.interest, 0);
+    
+    yearlyData.push({
+      year,
+      principal: totalPrincipal,
+      interest: totalInterest,
+      balance: yearPayments[yearPayments.length - 1]?.balance || 0
+    });
+  }
+
+  const maxAmount = Math.max(...yearlyData.map(d => d.principal + d.interest));
+
+  return (
+    <div className="w-full h-64 bg-gray-50 rounded-lg p-4">
+      <h4 className="text-sm font-semibold text-gray-900 mb-4">Annual Principal vs Interest</h4>
+      <div className="flex items-end justify-between h-48 space-x-1">
+        {yearlyData.map((data, index) => {
+          const totalHeight = 192; // h-48 in pixels
+          const principalHeight = (data.principal / maxAmount) * totalHeight;
+          const interestHeight = (data.interest / maxAmount) * totalHeight;
+
+          return (
+            <div key={index} className="flex flex-col items-center flex-1">
+              <div className="flex flex-col justify-end h-48 w-full max-w-8">
+                <div 
+                  className="bg-blue-500 rounded-t"
+                  style={{ height: `${principalHeight}px` }}
+                  title={`Principal: ${formatCurrency(data.principal)}`}
+                />
+                <div 
+                  className="bg-red-400"
+                  style={{ height: `${interestHeight}px` }}
+                  title={`Interest: ${formatCurrency(data.interest)}`}
+                />
+              </div>
+              <div className="text-xs text-gray-600 mt-1">{data.year}</div>
+            </div>
+          );
+        })}
+      </div>
+      <div className="flex justify-center space-x-4 mt-4 text-xs">
+        <div className="flex items-center">
+          <div className="w-3 h-3 bg-blue-500 rounded mr-1"></div>
+          <span>Principal</span>
+        </div>
+        <div className="flex items-center">
+          <div className="w-3 h-3 bg-red-400 rounded mr-1"></div>
+          <span>Interest</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const BalanceChart: React.FC<{ amortizationSchedule: PaymentBreakdown[]; loanAmount: string }> = ({ amortizationSchedule, loanAmount }) => {
+  if (!amortizationSchedule.length) return null;
+
+  const yearlyBalances = [];
+  const totalYears = Math.ceil(amortizationSchedule.length / 12);
+  
+  for (let year = 0; year <= totalYears; year++) {
+    const monthIndex = year * 12 - 1;
+    if (year === 0) {
+      yearlyBalances.push({ year: 0, balance: parseFloat(loanAmount) });
+    } else if (monthIndex < amortizationSchedule.length) {
+      yearlyBalances.push({ 
+        year, 
+        balance: amortizationSchedule[monthIndex].balance 
+      });
+    }
+  }
+
+  const maxBalance = parseFloat(loanAmount);
+
+  return (
+    <div className="w-full h-64 bg-gray-50 rounded-lg p-4">
+      <h4 className="text-sm font-semibold text-gray-900 mb-4">Loan Balance Over Time</h4>
+      <div className="relative h-48">
+        <svg viewBox="0 0 400 200" className="w-full h-full">
+          <defs>
+            <linearGradient id="balanceGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.3"/>
+              <stop offset="100%" stopColor="#3B82F6" stopOpacity="0.1"/>
+            </linearGradient>
+          </defs>
+          
+          {/* Grid lines */}
+          {[0, 25, 50, 75, 100].map(percent => (
+            <line
+              key={percent}
+              x1="0"
+              y1={200 - (percent * 2)}
+              x2="400"
+              y2={200 - (percent * 2)}
+              stroke="#E5E7EB"
+              strokeWidth="1"
+            />
+          ))}
+          
+          {/* Balance line */}
+          <polyline
+            fill="url(#balanceGradient)"
+            stroke="#3B82F6"
+            strokeWidth="2"
+            points={yearlyBalances.map((point, index) => {
+              const x = (index / (yearlyBalances.length - 1)) * 400;
+              const y = 200 - ((point.balance / maxBalance) * 200);
+              return `${x},${y}`;
+            }).join(' ')}
+          />
+          
+          {/* Close the area */}
+          <polyline
+            fill="url(#balanceGradient)"
+            stroke="none"
+            points={[
+              ...yearlyBalances.map((point, index) => {
+                const x = (index / (yearlyBalances.length - 1)) * 400;
+                const y = 200 - ((point.balance / maxBalance) * 200);
+                return `${x},${y}`;
+              }),
+              `400,200`,
+              `0,200`
+            ].join(' ')}
+          />
+        </svg>
+        
+        {/* Y-axis labels */}
+        <div className="absolute left-0 top-0 h-full flex flex-col justify-between text-xs text-gray-600 -ml-12">
+          <span>{formatCurrency(maxBalance)}</span>
+          <span>{formatCurrency(maxBalance * 0.75)}</span>
+          <span>{formatCurrency(maxBalance * 0.5)}</span>
+          <span>{formatCurrency(maxBalance * 0.25)}</span>
+          <span>$0</span>
+        </div>
+      </div>
+      
+      {/* X-axis labels */}
+      <div className="flex justify-between text-xs text-gray-600 mt-2">
+        <span>0</span>
+        <span>{Math.floor(totalYears / 4)} yrs</span>
+        <span>{Math.floor(totalYears / 2)} yrs</span>
+        <span>{Math.floor(3 * totalYears / 4)} yrs</span>
+        <span>{totalYears} yrs</span>
+      </div>
+    </div>
+  );
+};
+
 const MortgageCalculator: React.FC = () => {
   const [homePrice, setHomePrice] = useState('400000');
   const [downPayment, setDownPayment] = useState('80000');
@@ -108,223 +330,6 @@ const MortgageCalculator: React.FC = () => {
     });
 
     setAmortizationSchedule(schedule);
-  };
-
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(amount);
-  };
-
-  const formatCurrencyDetailed = (amount: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    }).format(amount);
-  };
-
-  // Chart components
-  const PieChart: React.FC<{ data: { label: string; value: number; color: string }[] }> = ({ data }) => {
-    const total = data.reduce((sum, item) => sum + item.value, 0);
-    let cumulativePercentage = 0;
-
-    return (
-      <div className="relative w-48 h-48 mx-auto">
-        <svg viewBox="0 0 100 100" className="w-full h-full transform -rotate-90">
-          {data.map((item, index) => {
-            const percentage = (item.value / total) * 100;
-            const strokeDasharray = `${percentage} ${100 - percentage}`;
-            const strokeDashoffset = -cumulativePercentage;
-            cumulativePercentage += percentage;
-
-            return (
-              <circle
-                key={index}
-                cx="50"
-                cy="50"
-                r="15.915"
-                fill="transparent"
-                stroke={item.color}
-                strokeWidth="31.83"
-                strokeDasharray={strokeDasharray}
-                strokeDashoffset={strokeDashoffset}
-                className="transition-all duration-300"
-              />
-            );
-          })}
-        </svg>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center">
-            <div className="text-lg font-bold text-gray-900">{formatCurrency(total)}</div>
-            <div className="text-xs text-gray-600">Total</div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const AmortizationChart: React.FC = () => {
-    if (!amortizationSchedule.length) return null;
-
-    const years = Math.ceil(amortizationSchedule.length / 12);
-    const yearlyData = [];
-
-    for (let year = 1; year <= years; year++) {
-      const startMonth = (year - 1) * 12;
-      const endMonth = Math.min(year * 12, amortizationSchedule.length);
-      const yearPayments = amortizationSchedule.slice(startMonth, endMonth);
-      
-      const totalPrincipal = yearPayments.reduce((sum, payment) => sum + payment.principal, 0);
-      const totalInterest = yearPayments.reduce((sum, payment) => sum + payment.interest, 0);
-      
-      yearlyData.push({
-        year,
-        principal: totalPrincipal,
-        interest: totalInterest,
-        balance: yearPayments[yearPayments.length - 1]?.balance || 0
-      });
-    }
-
-    const maxAmount = Math.max(...yearlyData.map(d => d.principal + d.interest));
-
-    return (
-      <div className="w-full h-64 bg-gray-50 rounded-lg p-4">
-        <h4 className="text-sm font-semibold text-gray-900 mb-4">Annual Principal vs Interest</h4>
-        <div className="flex items-end justify-between h-48 space-x-1">
-          {yearlyData.map((data, index) => {
-            const totalHeight = 192; // h-48 in pixels
-            const principalHeight = (data.principal / maxAmount) * totalHeight;
-            const interestHeight = (data.interest / maxAmount) * totalHeight;
-
-            return (
-              <div key={index} className="flex flex-col items-center flex-1">
-                <div className="flex flex-col justify-end h-48 w-full max-w-8">
-                  <div 
-                    className="bg-blue-500 rounded-t"
-                    style={{ height: `${principalHeight}px` }}
-                    title={`Principal: ${formatCurrency(data.principal)}`}
-                  />
-                  <div 
-                    className="bg-red-400"
-                    style={{ height: `${interestHeight}px` }}
-                    title={`Interest: ${formatCurrency(data.interest)}`}
-                  />
-                </div>
-                <div className="text-xs text-gray-600 mt-1">{data.year}</div>
-              </div>
-            );
-          })}
-        </div>
-        <div className="flex justify-center space-x-4 mt-4 text-xs">
-          <div className="flex items-center">
-            <div className="w-3 h-3 bg-blue-500 rounded mr-1"></div>
-            <span>Principal</span>
-          </div>
-          <div className="flex items-center">
-            <div className="w-3 h-3 bg-red-400 rounded mr-1"></div>
-            <span>Interest</span>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const BalanceChart: React.FC = () => {
-    if (!amortizationSchedule.length) return null;
-
-    const yearlyBalances = [];
-    const totalYears = Math.ceil(amortizationSchedule.length / 12);
-    
-    for (let year = 0; year <= totalYears; year++) {
-      const monthIndex = year * 12 - 1;
-      if (year === 0) {
-        yearlyBalances.push({ year: 0, balance: parseFloat(loanAmount) });
-      } else if (monthIndex < amortizationSchedule.length) {
-        yearlyBalances.push({ 
-          year, 
-          balance: amortizationSchedule[monthIndex].balance 
-        });
-      }
-    }
-
-    const maxBalance = parseFloat(loanAmount);
-
-    return (
-      <div className="w-full h-64 bg-gray-50 rounded-lg p-4">
-        <h4 className="text-sm font-semibold text-gray-900 mb-4">Loan Balance Over Time</h4>
-        <div className="relative h-48">
-          <svg viewBox="0 0 400 200" className="w-full h-full">
-            <defs>
-              <linearGradient id="balanceGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.3"/>
-                <stop offset="100%" stopColor="#3B82F6" stopOpacity="0.1"/>
-              </linearGradient>
-            </defs>
-            
-            {/* Grid lines */}
-            {[0, 25, 50, 75, 100].map(percent => (
-              <line
-                key={percent}
-                x1="0"
-                y1={200 - (percent * 2)}
-                x2="400"
-                y2={200 - (percent * 2)}
-                stroke="#E5E7EB"
-                strokeWidth="1"
-              />
-            ))}
-            
-            {/* Balance line */}
-            <polyline
-              fill="url(#balanceGradient)"
-              stroke="#3B82F6"
-              strokeWidth="2"
-              points={yearlyBalances.map((point, index) => {
-                const x = (index / (yearlyBalances.length - 1)) * 400;
-                const y = 200 - ((point.balance / maxBalance) * 200);
-                return `${x},${y}`;
-              }).join(' ')}
-            />
-            
-            {/* Close the area */}
-            <polyline
-              fill="url(#balanceGradient)"
-              stroke="none"
-              points={[
-                ...yearlyBalances.map((point, index) => {
-                  const x = (index / (yearlyBalances.length - 1)) * 400;
-                  const y = 200 - ((point.balance / maxBalance) * 200);
-                  return `${x},${y}`;
-                }),
-                `400,200`,
-                `0,200`
-              ].join(' ')}
-            />
-          </svg>
-          
-          {/* Y-axis labels */}
-          <div className="absolute left-0 top-0 h-full flex flex-col justify-between text-xs text-gray-600 -ml-12">
-            <span>{formatCurrency(maxBalance)}</span>
-            <span>{formatCurrency(maxBalance * 0.75)}</span>
-            <span>{formatCurrency(maxBalance * 0.5)}</span>
-            <span>{formatCurrency(maxBalance * 0.25)}</span>
-            <span>$0</span>
-          </div>
-        </div>
-        
-        {/* X-axis labels */}
-        <div className="flex justify-between text-xs text-gray-600 mt-2">
-          <span>0</span>
-          <span>{Math.floor(totalYears / 4)} yrs</span>
-          <span>{Math.floor(totalYears / 2)} yrs</span>
-          <span>{Math.floor(3 * totalYears / 4)} yrs</span>
-          <span>{totalYears} yrs</span>
-        </div>
-      </div>
-    );
   };
 
   return (
@@ -553,7 +558,7 @@ const MortgageCalculator: React.FC = () => {
 
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-4 text-center">Payment Composition</h3>
-                    <PieChart data={[
+                    <PieChartComponent data={[
                       { label: 'Principal & Interest', value: results.monthlyPI, color: '#3B82F6' },
                       { label: 'Property Tax', value: results.monthlyPropertyTax, color: '#10B981' },
                       { label: 'Insurance', value: results.monthlyInsurance, color: '#F59E0B' },
@@ -683,8 +688,8 @@ const MortgageCalculator: React.FC = () => {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                  <AmortizationChart />
-                  <BalanceChart />
+                  <AmortizationChart amortizationSchedule={amortizationSchedule} />
+                  <BalanceChart amortizationSchedule={amortizationSchedule} loanAmount={loanAmount} />
                 </div>
               </div>
 
