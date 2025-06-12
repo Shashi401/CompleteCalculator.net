@@ -10,7 +10,7 @@ import {
   Percent,
   TrendingUp,
   Heart,
-  Home,
+  Home as HomeIcon,
   Zap,
   Target
 } from 'lucide-react';
@@ -82,7 +82,7 @@ const Home: React.FC = () => {
   const featuredCalculators = [
     { name: 'Basic Calculator', path: '/basic-calculator', icon: Calculator, users: '2.1M' },
     { name: 'BMI Calculator', path: '/bmi-calculator', icon: Heart, users: '1.8M' },
-    { name: 'Mortgage Calculator', path: '/mortgage-calculator', icon: Home, users: '1.5M' },
+    { name: 'Mortgage Calculator', path: '/mortgage-calculator', icon: HomeIcon, users: '1.5M' },
     { name: 'Unit Converter', path: '/unit-converter', icon: Zap, users: '1.2M' },
   ];
 

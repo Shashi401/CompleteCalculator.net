@@ -247,7 +247,7 @@ const MortgageCalculator: React.FC = () => {
             <ul className="text-green-800 text-sm space-y-2">
               <li>• Property taxes</li>
               <li>• Homeowners insurance</li>
-              <li>• PMI (if down payment < 20%)</li>
+              <li>• PMI (if down payment &lt; 20%)</li>
               <li>• HOA fees</li>
               <li>• Maintenance and repairs</li>
             </ul>
