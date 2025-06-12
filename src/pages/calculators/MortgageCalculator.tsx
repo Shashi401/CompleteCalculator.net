@@ -680,14 +680,14 @@ const MortgageCalculator: React.FC = () => {
                 </div>
               </div>
 
-              {/* Charts */}
+              {/* Charts - Updated to display in two rows */}
               <div className="bg-white rounded-2xl shadow-lg p-8">
                 <div className="flex items-center mb-6">
                   <BarChart3 className="w-6 h-6 text-indigo-600 mr-3" />
                   <h2 className="text-2xl font-bold text-gray-900">Payment Analysis</h2>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div className="space-y-8">
                   <AmortizationChart amortizationSchedule={amortizationSchedule} />
                   <BalanceChart amortizationSchedule={amortizationSchedule} loanAmount={loanAmount} />
                 </div>
