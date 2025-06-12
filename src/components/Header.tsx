@@ -6,8 +6,12 @@ const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [selectedSuggestion, setSelectedSuggestion] = useState(-1);
   const navigate = useNavigate();
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const searchRef = useRef<HTMLDivElement>(null);
+  const mobileSearchRef = useRef<HTMLDivElement>(null);
 
   const calculators = {
     math: [
@@ -97,15 +101,67 @@ const Header: React.FC = () => {
     { name: 'Education', path: '/education', dropdown: 'education' },
   ];
 
+  // Filter suggestions based on search query
+  const suggestions = searchQuery.length > 0 
+    ? allCalculators.filter(calc => 
+        calc.name.toLowerCase().includes(searchQuery.toLowerCase())
+      ).slice(0, 8) // Limit to 8 suggestions
+    : [];
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    const found = allCalculators.find(calc => 
-      calc.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-    if (found) {
-      navigate(found.path);
+    if (suggestions.length > 0) {
+      const targetCalc = selectedSuggestion >= 0 ? suggestions[selectedSuggestion] : suggestions[0];
+      navigate(targetCalc.path);
       setSearchQuery('');
+      setShowSuggestions(false);
+      setSelectedSuggestion(-1);
       setIsMenuOpen(false);
+    }
+  };
+
+  const handleSearchInputChange = (value: string) => {
+    setSearchQuery(value);
+    setShowSuggestions(value.length > 0);
+    setSelectedSuggestion(-1);
+  };
+
+  const handleSuggestionClick = (calc: { name: string; path: string }) => {
+    navigate(calc.path);
+    setSearchQuery('');
+    setShowSuggestions(false);
+    setSelectedSuggestion(-1);
+    setIsMenuOpen(false);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (!showSuggestions || suggestions.length === 0) return;
+
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault();
+        setSelectedSuggestion(prev => 
+          prev < suggestions.length - 1 ? prev + 1 : 0
+        );
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        setSelectedSuggestion(prev => 
+          prev > 0 ? prev - 1 : suggestions.length - 1
+        );
+        break;
+      case 'Escape':
+        setShowSuggestions(false);
+        setSelectedSuggestion(-1);
+        break;
+      case 'Enter':
+        e.preventDefault();
+        if (selectedSuggestion >= 0) {
+          handleSuggestionClick(suggestions[selectedSuggestion]);
+        } else if (suggestions.length > 0) {
+          handleSuggestionClick(suggestions[0]);
+        }
+        break;
     }
   };
 
@@ -119,6 +175,12 @@ const Header: React.FC = () => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setActiveDropdown(null);
       }
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setShowSuggestions(false);
+      }
+      if (mobileSearchRef.current && !mobileSearchRef.current.contains(event.target as Node)) {
+        setShowSuggestions(false);
+      }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
@@ -126,6 +188,32 @@ const Header: React.FC = () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  const SearchSuggestions: React.FC<{ isMobile?: boolean }> = ({ isMobile = false }) => (
+    showSuggestions && suggestions.length > 0 && (
+      <div className={`absolute top-full left-0 right-0 mt-1 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50 ${isMobile ? 'max-h-64' : 'max-h-80'} overflow-y-auto`}>
+        {suggestions.map((calc, index) => (
+          <button
+            key={calc.path}
+            onClick={() => handleSuggestionClick(calc)}
+            className={`w-full text-left px-4 py-2 hover:bg-blue-50 transition-colors ${
+              selectedSuggestion === index ? 'bg-blue-50 text-blue-600' : 'text-gray-700'
+            }`}
+          >
+            <div className="flex items-center space-x-2">
+              <Calculator className="w-4 h-4 text-gray-400" />
+              <span className="text-sm">{calc.name}</span>
+            </div>
+          </button>
+        ))}
+        {searchQuery && suggestions.length === 0 && (
+          <div className="px-4 py-2 text-sm text-gray-500">
+            No calculators found for "{searchQuery}"
+          </div>
+        )}
+      </div>
+    )
+  );
 
   return (
     <header className="bg-white shadow-lg border-b border-blue-100 sticky top-0 z-50">
@@ -138,18 +226,22 @@ const Header: React.FC = () => {
           </Link>
 
           {/* Desktop Search */}
-          <div className="hidden lg:flex flex-1 max-w-md mx-8">
-            <form onSubmit={handleSearch} className="w-full">
+          <div className="hidden lg:flex flex-1 max-w-md mx-8" ref={searchRef}>
+            <form onSubmit={handleSearch} className="w-full relative">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
                 <input
                   type="text"
                   placeholder="Search calculators..."
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e) => handleSearchInputChange(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  onFocus={() => searchQuery.length > 0 && setShowSuggestions(true)}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  autoComplete="off"
                 />
               </div>
+              <SearchSuggestions />
             </form>
           </div>
 
@@ -221,7 +313,7 @@ const Header: React.FC = () => {
         {isMenuOpen && (
           <div className="lg:hidden py-4 border-t border-gray-200">
             {/* Mobile Search */}
-            <div className="mb-4">
+            <div className="mb-4 relative" ref={mobileSearchRef}>
               <form onSubmit={handleSearch}>
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -229,11 +321,15 @@ const Header: React.FC = () => {
                     type="text"
                     placeholder="Search calculators..."
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onChange={(e) => handleSearchInputChange(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    onFocus={() => searchQuery.length > 0 && setShowSuggestions(true)}
                     className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    autoComplete="off"
                   />
                 </div>
               </form>
+              <SearchSuggestions isMobile />
             </div>
 
             {/* Mobile Navigation */}
