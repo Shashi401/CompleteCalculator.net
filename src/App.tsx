@@ -27,6 +27,11 @@ import MatrixCalculator from './pages/calculators/MatrixCalculator';
 import LogarithmCalculator from './pages/calculators/LogarithmCalculator';
 import RootCalculator from './pages/calculators/RootCalculator';
 import BinaryCalculator from './pages/calculators/BinaryCalculator';
+import FactorialCalculator from './pages/calculators/FactorialCalculator';
+import GCDCalculator from './pages/calculators/GCDCalculator';
+import LCMCalculator from './pages/calculators/LCMCalculator';
+import FibonacciCalculator from './pages/calculators/FibonacciCalculator';
+import ScientificNotationCalculator from './pages/calculators/ScientificNotationCalculator';
 
 function App() {
   return (
@@ -60,6 +65,11 @@ function App() {
             <Route path="/logarithm-calculator" element={<LogarithmCalculator />} />
             <Route path="/root-calculator" element={<RootCalculator />} />
             <Route path="/binary-calculator" element={<BinaryCalculator />} />
+            <Route path="/factorial-calculator" element={<FactorialCalculator />} />
+            <Route path="/gcd-calculator" element={<GCDCalculator />} />
+            <Route path="/lcm-calculator" element={<LCMCalculator />} />
+            <Route path="/fibonacci-calculator" element={<FibonacciCalculator />} />
+            <Route path="/scientific-notation-calculator" element={<ScientificNotationCalculator />} />
           </Routes>
         </main>
         <Footer />
