@@ -12,6 +12,11 @@ import UnitConverter from './pages/calculators/UnitConverter';
 import DateCalculator from './pages/calculators/DateCalculator';
 import GradeCalculator from './pages/calculators/GradeCalculator';
 import PercentageCalculator from './pages/calculators/PercentageCalculator';
+import FractionCalculator from './pages/calculators/FractionCalculator';
+import RatioCalculator from './pages/calculators/RatioCalculator';
+import AverageCalculator from './pages/calculators/AverageCalculator';
+import RandomNumberGenerator from './pages/calculators/RandomNumberGenerator';
+import AreaCalculator from './pages/calculators/AreaCalculator';
 
 function App() {
   return (
@@ -30,6 +35,11 @@ function App() {
             <Route path="/date-calculator" element={<DateCalculator />} />
             <Route path="/grade-calculator" element={<GradeCalculator />} />
             <Route path="/percentage-calculator" element={<PercentageCalculator />} />
+            <Route path="/fraction-calculator" element={<FractionCalculator />} />
+            <Route path="/ratio-calculator" element={<RatioCalculator />} />
+            <Route path="/average-calculator" element={<AverageCalculator />} />
+            <Route path="/random-number-generator" element={<RandomNumberGenerator />} />
+            <Route path="/area-calculator" element={<AreaCalculator />} />
           </Routes>
         </main>
         <Footer />
