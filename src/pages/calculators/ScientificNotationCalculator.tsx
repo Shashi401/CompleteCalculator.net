@@ -302,7 +302,7 @@ const ScientificNotationCalculator: React.FC = () => {
             <div>
               <h4 className="font-semibold">Format</h4>
               <ul className="text-gray-600 space-y-1 mt-2">
-                <li>• a × 10^n where 1 ≤ |a| < 10</li>
+                <li>• a × 10<sup>n</sup> where 1 ≤ |a| &lt; 10</li>
                 <li>• Coefficient: significant digits</li>
                 <li>• Exponent: power of 10</li>
                 <li>• Positive exponent: large numbers</li>
