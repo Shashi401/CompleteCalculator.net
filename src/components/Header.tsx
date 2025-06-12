@@ -57,6 +57,7 @@ const Header: React.FC = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
             <Link to="/" className="text-gray-700 hover:text-blue-600 transition-colors">Home</Link>
+            <Link to="/math-calculators" className="text-gray-700 hover:text-blue-600 transition-colors">Math</Link>
             <Link to="/basic-calculator" className="text-gray-700 hover:text-blue-600 transition-colors">Basic</Link>
             <Link to="/scientific-calculator" className="text-gray-700 hover:text-blue-600 transition-colors">Scientific</Link>
             <Link to="/bmi-calculator" className="text-gray-700 hover:text-blue-600 transition-colors">Health</Link>
@@ -91,6 +92,7 @@ const Header: React.FC = () => {
             </div>
             <nav className="space-y-2">
               <Link to="/" className="block py-2 text-gray-700 hover:text-blue-600 transition-colors">Home</Link>
+              <Link to="/math-calculators" className="block py-2 text-gray-700 hover:text-blue-600 transition-colors">Math Calculators</Link>
               <Link to="/basic-calculator" className="block py-2 text-gray-700 hover:text-blue-600 transition-colors">Basic Calculator</Link>
               <Link to="/scientific-calculator" className="block py-2 text-gray-700 hover:text-blue-600 transition-colors">Scientific Calculator</Link>
               <Link to="/bmi-calculator" className="block py-2 text-gray-700 hover:text-blue-600 transition-colors">BMI Calculator</Link>

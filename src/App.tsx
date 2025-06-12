@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
+import MathCalculators from './pages/MathCalculators';
 import BasicCalculator from './pages/calculators/BasicCalculator';
 import ScientificCalculator from './pages/calculators/ScientificCalculator';
 import BMICalculator from './pages/calculators/BMICalculator';
@@ -20,6 +21,7 @@ function App() {
         <main className="container mx-auto px-4 py-8">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/math-calculators" element={<MathCalculators />} />
             <Route path="/basic-calculator" element={<BasicCalculator />} />
             <Route path="/scientific-calculator" element={<ScientificCalculator />} />
             <Route path="/bmi-calculator" element={<BMICalculator />} />

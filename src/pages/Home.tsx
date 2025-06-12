@@ -21,6 +21,7 @@ const Home: React.FC = () => {
       title: 'Math Calculators',
       icon: Calculator,
       color: 'from-blue-500 to-blue-600',
+      link: '/math-calculators',
       calculators: [
         { name: 'Basic Calculator', path: '/basic-calculator', description: 'Simple arithmetic operations' },
         { name: 'Scientific Calculator', path: '/scientific-calculator', description: 'Advanced mathematical functions' },
@@ -164,9 +165,18 @@ const Home: React.FC = () => {
               </div>
               
               <div className="mt-6 pt-4 border-t border-gray-100">
-                <button className="text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors">
-                  View all in {category.title} →
-                </button>
+                {category.link ? (
+                  <Link 
+                    to={category.link}
+                    className="text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors"
+                  >
+                    View all in {category.title} →
+                  </Link>
+                ) : (
+                  <button className="text-blue-600 hover:text-blue-700 font-medium text-sm transition-colors">
+                    View all in {category.title} →
+                  </button>
+                )}
               </div>
             </div>
           ))}
