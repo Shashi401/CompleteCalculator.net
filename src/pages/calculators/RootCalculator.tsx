@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Home, ChevronRight, SquareRoot } from 'lucide-react';
+import { Home, ChevronRight, Square as SquareRoot } from 'lucide-react';
 
 const RootCalculator: React.FC = () => {
   const [number, setNumber] = useState('');
