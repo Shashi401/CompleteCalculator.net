@@ -13,6 +13,11 @@ import DateCalculator from './pages/calculators/DateCalculator';
 import GradeCalculator from './pages/calculators/GradeCalculator';
 import PercentageCalculator from './pages/calculators/PercentageCalculator';
 import FractionCalculator from './pages/calculators/FractionCalculator';
+import MixedNumberCalculator from './pages/calculators/MixedNumberCalculator';
+import SimplifyFractionsCalculator from './pages/calculators/SimplifyFractionsCalculator';
+import DecimalToFractionCalculator from './pages/calculators/DecimalToFractionCalculator';
+import FractionToDecimalCalculator from './pages/calculators/FractionToDecimalCalculator';
+import BigNumberFractionCalculator from './pages/calculators/BigNumberFractionCalculator';
 import RatioCalculator from './pages/calculators/RatioCalculator';
 import AverageCalculator from './pages/calculators/AverageCalculator';
 import RandomNumberGenerator from './pages/calculators/RandomNumberGenerator';
@@ -56,6 +61,11 @@ function App() {
             <Route path="/grade-calculator" element={<GradeCalculator />} />
             <Route path="/percentage-calculator" element={<PercentageCalculator />} />
             <Route path="/fraction-calculator" element={<FractionCalculator />} />
+            <Route path="/mixed-number-calculator" element={<MixedNumberCalculator />} />
+            <Route path="/simplify-fractions-calculator" element={<SimplifyFractionsCalculator />} />
+            <Route path="/decimal-to-fraction-calculator" element={<DecimalToFractionCalculator />} />
+            <Route path="/fraction-to-decimal-calculator" element={<FractionToDecimalCalculator />} />
+            <Route path="/big-number-fraction-calculator" element={<BigNumberFractionCalculator />} />
             <Route path="/ratio-calculator" element={<RatioCalculator />} />
             <Route path="/average-calculator" element={<AverageCalculator />} />
             <Route path="/random-number-generator" element={<RandomNumberGenerator />} />
