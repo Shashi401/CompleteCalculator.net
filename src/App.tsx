@@ -42,6 +42,8 @@ import RoundingCalculator from './pages/calculators/RoundingCalculator';
 import BigNumberCalculator from './pages/calculators/BigNumberCalculator';
 import CommonDenominatorCalculator from './pages/calculators/CommonDenominatorCalculator';
 import LongDivisionCalculator from './pages/calculators/LongDivisionCalculator';
+import EquationSolver from './pages/calculators/EquationSolver';
+import SystemOfEquations from './pages/calculators/SystemOfEquations';
 
 function App() {
   return (
@@ -90,6 +92,8 @@ function App() {
             <Route path="/big-number-calculator" element={<BigNumberCalculator />} />
             <Route path="/common-denominator-calculator" element={<CommonDenominatorCalculator />} />
             <Route path="/long-division-calculator" element={<LongDivisionCalculator />} />
+            <Route path="/equation-solver" element={<EquationSolver />} />
+            <Route path="/system-of-equations" element={<SystemOfEquations />} />
           </Routes>
         </main>
         <Footer />
