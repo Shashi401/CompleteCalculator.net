@@ -44,6 +44,10 @@ import CommonDenominatorCalculator from './pages/calculators/CommonDenominatorCa
 import LongDivisionCalculator from './pages/calculators/LongDivisionCalculator';
 import EquationSolver from './pages/calculators/EquationSolver';
 import SystemOfEquations from './pages/calculators/SystemOfEquations';
+import FactoringCalculator from './pages/calculators/FactoringCalculator';
+import PolynomialCalculator from './pages/calculators/PolynomialCalculator';
+import ExponentCalculator from './pages/calculators/ExponentCalculator';
+import SlopeCalculator from './pages/calculators/SlopeCalculator';
 
 function App() {
   return (
@@ -94,6 +98,10 @@ function App() {
             <Route path="/long-division-calculator" element={<LongDivisionCalculator />} />
             <Route path="/equation-solver" element={<EquationSolver />} />
             <Route path="/system-of-equations" element={<SystemOfEquations />} />
+            <Route path="/factoring-calculator" element={<FactoringCalculator />} />
+            <Route path="/polynomial-calculator" element={<PolynomialCalculator />} />
+            <Route path="/exponent-calculator" element={<ExponentCalculator />} />
+            <Route path="/slope-calculator" element={<SlopeCalculator />} />
           </Routes>
         </main>
         <Footer />
