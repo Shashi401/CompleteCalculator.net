@@ -48,6 +48,11 @@ import FactoringCalculator from './pages/calculators/FactoringCalculator';
 import PolynomialCalculator from './pages/calculators/PolynomialCalculator';
 import ExponentCalculator from './pages/calculators/ExponentCalculator';
 import SlopeCalculator from './pages/calculators/SlopeCalculator';
+import SurfaceAreaCalculator from './pages/calculators/SurfaceAreaCalculator';
+import RightTriangleCalculator from './pages/calculators/RightTriangleCalculator';
+import CircleCalculator from './pages/calculators/CircleCalculator';
+import PythagoreanTheoremCalculator from './pages/calculators/PythagoreanTheoremCalculator';
+import DistanceCalculator from './pages/calculators/DistanceCalculator';
 
 function App() {
   return (
@@ -102,6 +107,11 @@ function App() {
             <Route path="/polynomial-calculator" element={<PolynomialCalculator />} />
             <Route path="/exponent-calculator" element={<ExponentCalculator />} />
             <Route path="/slope-calculator" element={<SlopeCalculator />} />
+            <Route path="/surface-area-calculator" element={<SurfaceAreaCalculator />} />
+            <Route path="/right-triangle-calculator" element={<RightTriangleCalculator />} />
+            <Route path="/circle-calculator" element={<CircleCalculator />} />
+            <Route path="/pythagorean-theorem" element={<PythagoreanTheoremCalculator />} />
+            <Route path="/distance-calculator" element={<DistanceCalculator />} />
           </Routes>
         </main>
         <Footer />
