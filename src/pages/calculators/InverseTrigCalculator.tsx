@@ -177,7 +177,7 @@ const InverseTrigCalculator: React.FC = () => {
         0: '0',
         [1/Math.sqrt(3)]: 'π/6 (30°)',
         1: 'π/4 (45°)',
-        Math.sqrt(3): 'π/3 (60°)',
+        [Math.sqrt(3)]: 'π/3 (60°)',
         [-1/Math.sqrt(3)]: '-π/6 (-30°)',
         [-1]: '-π/4 (-45°)',
         [-Math.sqrt(3)]: '-π/3 (-60°)'
