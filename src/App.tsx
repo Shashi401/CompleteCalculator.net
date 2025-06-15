@@ -64,6 +64,11 @@ import NumberSequenceCalculator from './pages/calculators/NumberSequenceCalculat
 import NumberBaseConverter from './pages/calculators/NumberBaseConverter';
 import HexCalculator from './pages/calculators/HexCalculator';
 import DerivativeCalculator from './pages/calculators/DerivativeCalculator';
+import IntegralCalculator from './pages/calculators/IntegralCalculator';
+import LimitCalculator from './pages/calculators/LimitCalculator';
+import SeriesCalculator from './pages/calculators/SeriesCalculator';
+import TaylorSeriesCalculator from './pages/calculators/TaylorSeriesCalculator';
+import VectorCalculator from './pages/calculators/VectorCalculator';
 
 function App() {
   return (
@@ -134,6 +139,11 @@ function App() {
             <Route path="/number-base-converter" element={<NumberBaseConverter />} />
             <Route path="/hex-calculator" element={<HexCalculator />} />
             <Route path="/derivative-calculator" element={<DerivativeCalculator />} />
+            <Route path="/integral-calculator" element={<IntegralCalculator />} />
+            <Route path="/limit-calculator" element={<LimitCalculator />} />
+            <Route path="/series-calculator" element={<SeriesCalculator />} />
+            <Route path="/taylor-series" element={<TaylorSeriesCalculator />} />
+            <Route path="/vector-calculator" element={<VectorCalculator />} />
           </Routes>
         </main>
         <Footer />
