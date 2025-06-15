@@ -42,17 +42,11 @@ import RoundingCalculator from './pages/calculators/RoundingCalculator';
 import BigNumberCalculator from './pages/calculators/BigNumberCalculator';
 import CommonDenominatorCalculator from './pages/calculators/CommonDenominatorCalculator';
 import LongDivisionCalculator from './pages/calculators/LongDivisionCalculator';
-import EquationSolver from './pages/calculators/EquationSolver';
-import SystemOfEquations from './pages/calculators/SystemOfEquations';
-import FactoringCalculator from './pages/calculators/FactoringCalculator';
-import PolynomialCalculator from './pages/calculators/PolynomialCalculator';
-import ExponentCalculator from './pages/calculators/ExponentCalculator';
-import SlopeCalculator from './pages/calculators/SlopeCalculator';
-import SurfaceAreaCalculator from './pages/calculators/SurfaceAreaCalculator';
-import RightTriangleCalculator from './pages/calculators/RightTriangleCalculator';
-import CircleCalculator from './pages/calculators/CircleCalculator';
-import PythagoreanTheoremCalculator from './pages/calculators/PythagoreanTheoremCalculator';
-import DistanceCalculator from './pages/calculators/DistanceCalculator';
+import TrigonometryCalculator from './pages/calculators/TrigonometryCalculator';
+import LawOfSinesCalculator from './pages/calculators/LawOfSinesCalculator';
+import LawOfCosinesCalculator from './pages/calculators/LawOfCosinesCalculator';
+import UnitCircleCalculator from './pages/calculators/UnitCircleCalculator';
+import InverseTrigCalculator from './pages/calculators/InverseTrigCalculator';
 
 function App() {
   return (
@@ -101,17 +95,11 @@ function App() {
             <Route path="/big-number-calculator" element={<BigNumberCalculator />} />
             <Route path="/common-denominator-calculator" element={<CommonDenominatorCalculator />} />
             <Route path="/long-division-calculator" element={<LongDivisionCalculator />} />
-            <Route path="/equation-solver" element={<EquationSolver />} />
-            <Route path="/system-of-equations" element={<SystemOfEquations />} />
-            <Route path="/factoring-calculator" element={<FactoringCalculator />} />
-            <Route path="/polynomial-calculator" element={<PolynomialCalculator />} />
-            <Route path="/exponent-calculator" element={<ExponentCalculator />} />
-            <Route path="/slope-calculator" element={<SlopeCalculator />} />
-            <Route path="/surface-area-calculator" element={<SurfaceAreaCalculator />} />
-            <Route path="/right-triangle-calculator" element={<RightTriangleCalculator />} />
-            <Route path="/circle-calculator" element={<CircleCalculator />} />
-            <Route path="/pythagorean-theorem" element={<PythagoreanTheoremCalculator />} />
-            <Route path="/distance-calculator" element={<DistanceCalculator />} />
+            <Route path="/trigonometry-calculator" element={<TrigonometryCalculator />} />
+            <Route path="/law-of-sines" element={<LawOfSinesCalculator />} />
+            <Route path="/law-of-cosines" element={<LawOfCosinesCalculator />} />
+            <Route path="/unit-circle-calculator" element={<UnitCircleCalculator />} />
+            <Route path="/inverse-trig-calculator" element={<InverseTrigCalculator />} />
           </Routes>
         </main>
         <Footer />
