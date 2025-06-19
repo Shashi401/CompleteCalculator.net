@@ -526,7 +526,7 @@ const SeriesCalculator: React.FC = () => {
                 <li>• Terms: a, ar, ar², ar³, ...</li>
                 <li>• Formula: a_n = ar^(n-1)</li>
                 <li>• Sum: S_n = a(1-r^n)/(1-r) for r≠1</li>
-                <li>• Infinite sum: S_∞ = a/(1-r) for |r|<1</li>
+                <li>• Infinite sum: S_∞ = a/(1-r) for |r|&lt;1</li>
                 <li>• Example: 3, 6, 12, 24, ... (a=3, r=2)</li>
               </ul>
             </div>
@@ -542,10 +542,10 @@ const SeriesCalculator: React.FC = () => {
             <div>
               <h4 className="font-semibold">Convergence Tests</h4>
               <ul className="text-gray-600 space-y-1 mt-2">
-                <li>• Geometric series: |r| < 1</li>
-                <li>• p-series: Σ 1/n^p converges for p > 1</li>
+                <li>• Geometric series: |r| &lt; 1</li>
+                <li>• p-series: Σ 1/n^p converges for p &gt; 1</li>
                 <li>• Alternating series: Terms decrease to 0</li>
-                <li>• Ratio test: lim|a_(n+1)/a_n| < 1</li>
+                <li>• Ratio test: lim|a_(n+1)/a_n| &lt; 1</li>
               </ul>
             </div>
           </div>
